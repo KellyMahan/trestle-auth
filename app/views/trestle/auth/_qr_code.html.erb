@@ -1,0 +1,51 @@
+<script>
+	function toggle_qr_visibility(){
+		if($("#auth_administrator_use_otp").prop('checked')){
+			$("#qr-hidden-fields").show();
+		}else{
+			$("#qr-hidden-fields").hide();
+		}
+	}	
+	function submit_2factor(){
+		$.post( "/admin/verify_twofactorauth", { twofactorauth: $("#twofactorauth").val()})
+		  .done(function( data ) {
+		    $("#2factorform").fadeOut();
+				$("#2factormessage").html("<h3>Verified!</h3>");
+		    $("#2factormessage").fadeIn();
+		  });
+	}
+</script>
+
+<div id="2factormessage">
+</div>
+<div id="2factorform">
+<div class="checkbox">
+	<label>
+		<input name="auth/administrator[use_otp]" type="hidden" value="<%=current_user.use_otp%>">
+		<input value="1" label="Enable 2 Factor Authentication" onclick="toggle_qr_visibility();" type="checkbox" name="auth/administrator[use_otp]" id="auth_administrator_use_otp">
+		Enable 2 Factor Authentication
+	</label>
+</div>
+
+<div id="qr-hidden-fields" style="display:none;">
+	<table class="qr">
+	  <% qr.modules.each_index do |x| %>
+	      <tr>
+	        <% qr.modules.each_index do |y| %>
+	            <% if qr.dark?(x,y) %>
+	                <td class="black"/>
+	            <% else %>
+	                <td class="white"/>
+	            <% end %>
+	        <% end %>
+	      </tr>
+	  <% end %>
+	</table>
+	<br/>
+	<div class="form-group">
+		<label class="control-label" for="auth_administrator_otp" style="width">Verify 2 Factor Auth</label>
+		<button name="button" type="submit" class="btn btn-success" style="float:right;margin-left:5px;" onclick="submit_2factor();return false;"><span class="btn-label">Verify</span></button>
+		<input class="form-control" type="text" style="width:200px;" name="twofactorauth" id="twofactorauth">
+	</div>
+</div>
+</div>

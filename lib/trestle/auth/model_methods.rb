@@ -8,6 +8,8 @@ module Trestle
 
       included do
         has_secure_password
+        has_one_time_password
+        attr_accessor :otp
       end
 
       module ClassMethods

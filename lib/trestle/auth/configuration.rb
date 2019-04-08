@@ -50,6 +50,8 @@ module Trestle
       option :redirect_on_logout, -> { login_url }, evaluate: false
 
       option :logo
+      option :drift_time, 60
+      option :twofactor_name, "Trestle Auth Admin"
 
       option :remember, Rememberable.new
     end

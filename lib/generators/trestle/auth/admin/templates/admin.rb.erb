@@ -29,5 +29,9 @@ Trestle.resource(:<%= plural_name %>, model: Trestle.config.auth.user_class, sco
       col(sm: 6) { password_field :password }
       col(sm: 6) { password_field :password_confirmation }
     end
+		
+		sidebar do
+			twofactor :otp_secret_key, current_user: current_user
+		end
   end
 end

@@ -1,0 +1,22 @@
+<%= form_tag "/admin/twofactorauth_login", class: "login-form" do %>
+  <%= hook("auth.login.heading") %>
+
+  <% if flash[:error] -%>
+    <div class="alert alert-danger">
+      <p><%= flash[:error] %></p>
+    </div>
+  <% end -%>
+
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+      <%= password_field_tag :twofactorauth, "", placeholder: "2 Factor Auth", class: "form-control" %>
+    </div>
+  </div>
+
+  <%= hook("auth.login.form") %>
+
+  <div class="form-group">
+    <%= submit_tag t("admin.auth.login", default: "Login"), class: "btn btn-primary btn-block" %>
+  </div>
+<% end %>

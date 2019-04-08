@@ -130,6 +130,15 @@ module Trestle
               # config.auth.remember.cookie, ->(user) {
               #   { value: user.remember_token, expires: user.remember_token_expires_at }
               # }
+              
+              # Customize the drift time for 2 factor authentication. Default is 60 seconds.
+              #
+              # config.auth.drift_time = 60
+              
+              # Customize the application name for google authenticator.
+              #
+              # config.auth.twofactor_name = "Trestle Auth Admin"
+              
             RUBY
           end
         end

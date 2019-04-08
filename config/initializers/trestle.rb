@@ -6,4 +6,6 @@ Trestle.configure do |config|
   config.hook("view.header") do
     render "trestle/auth/userbox"
   end
+  
+  config.form_field :twofactor, Trestle::Auth::TwofactorField
 end
